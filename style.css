@@ -1,0 +1,116 @@
+body{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "header header"
+        "panel tablero";
+    min-width: 700px;
+}
+
+header{
+    place-self: center;
+    grid-area: header;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+/*Panel*/
+#panel{
+    width: fit-content;
+    grid-area: panel;
+    background-color: gray;
+    border: 5px dashed black;
+    border-radius: 10px;
+}
+
+.valor{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.valor label{
+    margin-left: 5%;
+}
+
+.valor span{
+    background-color: bisque;
+    border: 5px solid yellow;
+    border-radius: 10px;
+    padding: 2%;
+}
+
+/* Tablero */
+#tablero{
+    grid-area: tablero;
+    place-self: center;
+    display: grid;
+    grid-template-columns: repeat(4, 120px);
+    grid-template-rows: repeat(auto-fill, 120px);
+    grid-row-gap: .5em;
+    grid-column-gap: .5em;
+    width: fit-content;
+    padding: 2%;
+    background-color: darkslategray;
+    justify-content: space-evenly;
+
+}
+
+#tablero div{
+    display: flex;
+    margin:1%;
+    margin-top: 1.5%;
+    width: 100px;
+    height: 100px;
+    border: 5px solid antiquewhite;
+    border-radius: 5px;
+    font-size: 2em;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+}
+
+[class = '2']{
+    background-color: rgb(250, 216, 221);
+}
+
+[class = '4']{
+    background-color: lightpink;
+}
+
+[class = '8'] {
+    background-color: rgb(252, 160, 85);
+}
+
+[class = '16'] {
+    background-color: rgb(253, 133, 34);
+}
+
+[class = '32'] {
+    background-color: rgb(248, 91, 52);
+}
+
+[class = '64'] {
+    background-color: rgb(252, 58, 45);
+}
+
+[class = '128'] {
+    background-color: rgb(255, 73, 28);
+}
+
+[class = '256'] {
+    background-color: rgb(167, 253, 54);
+}
+
+[class = '512'] {
+    background-color: rgb(19, 248, 50);
+}
+
+[class = '1024'] {
+    background-color: rgb(11, 184, 117);
+}
+
+[class = '2058'] {
+    background-color: rgb(0, 96, 185);
+}
