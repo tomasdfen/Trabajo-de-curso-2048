@@ -12,7 +12,15 @@ var iniciado = false
 var ultima = 0;
 // Funciones
 
+var arraysMatch = function (arr1, arr2) {
 
+    if (arr1.length !== arr2.length) return false;
+    for (var i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+    }
+    return true;
+
+};
 
 function dibujaTablero() {
     for (let i = 0; i < dimension; i++) {
@@ -112,6 +120,7 @@ function abajo() {
 }
 
 function arriba() {
+    n_celdas = [...celdas]
     for (let i = 0; i < dimension; i++) {
         let columna = []
         for (let j = 0; j < dimension; j++) {
@@ -124,8 +133,8 @@ function arriba() {
         let nueva_columna = columna_filtrada.concat(ceros)
 
         for (let j = 0; j < dimension; j++) {
-            celdas[i + (dimension * j)].className = nueva_columna[j].toString()
-            celdas[i + (dimension * j)].innerHTML = nueva_columna[j]
+            n_celdas[i + (dimension * j)].className = nueva_columna[j].toString()
+            n_celdas[i + (dimension * j)].innerHTML = nueva_columna[j]
         }
     }
 }
@@ -143,17 +152,6 @@ function sumaFila() {
     }
 }
 
-function checkFila() {
-    var mod = false;
-    for (let i = 0; i < (dimension * dimension) - 1; i++) {
-        if (celdas[i].innerHTML === celdas[i + 1].innerHTML) {
-            mod = true;
-            break;
-        }
-    }
-    return mod;
-}
-
 
 function sumaColumna() {
     for (let i = 0; i < (dimension * (dimension - 1)); i++) {
@@ -166,16 +164,7 @@ function sumaColumna() {
     }
 }
 
-function checkColumna() {
-    var mod = false;
-    for (let i = 0; i < (dimension * (dimension - 1)); i++) {
-        if (celdas[i].innerHTML === celdas[i + dimension].innerHTML) {
-            mod = true;
-            break;
-        }
-    }
-    return mod
-}
+
 function incrementaTiempo() {
     tiempo_transcurrido++;
     let segundos_transcurridos = tiempo_transcurrido % 60
@@ -187,73 +176,62 @@ function incrementaTiempo() {
     }
 }
 
+
 function inicia_contador() {
     if (!iniciado) {
         iniciado = true;
         temporizador = window.setInterval(incrementaTiempo, 1000);
     }
 }
+
+
 function actualiza(direccion) {
+    n_celdas = [...celdas]
     switch (direccion.keyCode) {
         case 37:
-            if (checkFila()) {
-                inicia_contador();
-                console.log("Se pulso izquierda")
-                izquierda();
-                posible = sumaFila();
-                izquierda();
-                nuevo_numero();
-                puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-            }
+            inicia_contador();
+            console.log("Se pulso izquierda")
+            izquierda();
+            sumaFila();
+            izquierda();
             break;
         case 38:
-            if (checkColumna()) {
-                ultima = 38;
-                inicia_contador();
-                console.log("Se pulso arriba")
-                arriba();
-                posible = sumaColumna();
-                arriba();
-                nuevo_numero();
-                puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-            }
+            ultima = 38;
+            inicia_contador();
+            console.log("Se pulso arriba")
+            arriba();
+            sumaColumna();
+            arriba();
             break;
         case 39:
-            if (checkFila()) {
-                ultima = 39;
-                inicia_contador();
-                console.log("Se pulso derecha")
-                derecha();
-                posible = sumaFila();
-                derecha();
-                nuevo_numero();
-                puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-            }
+            ultima = 39;
+            inicia_contador();
+            console.log("Se pulso derecha")
+            derecha();
+            sumaFila();
+            derecha();
             break;
         case 40:
-            if (checkColumna()) {
-                ultima = 40;
-                inicia_contador();
-                console.log("Se pulso abajo")
-                abajo();
-                posible = sumaColumna();
-                abajo();
-                nuevo_numero();
-                puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-            }
+            ultima = 40;
+            inicia_contador();
+            console.log("Se pulso abajo")
+            abajo();
+            sumaColumna();
+            abajo();
             break;
         default:
             break;
     }
-    if (!checkColumna() && !checkFila()) {
-        if ((celdas.map((celda) => parseInt(celda.innerHTML)).includes(0))){
+    if ((celdas.map((celda) => parseInt(celda.innerHTML)).includes(0))) {
+        if (arraysMatch(n_celdas, celdas)) {
             nuevo_numero();
-        }else{
-            iniciado = false;
-            fin();
         }
-
+        puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
+    } else {
+        iniciado = false;
+        fin();
     }
+
 }
 
 function fin() {
