@@ -223,9 +223,7 @@ function actualiza(direccion) {
             break;
     }
     if ((celdas.map((celda) => parseInt(celda.innerHTML)).includes(0))) {
-        if (arraysMatch(n_celdas, celdas)) {
-            nuevo_numero();
-        }
+        nuevo_numero();
         puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
     } else {
         iniciado = false;

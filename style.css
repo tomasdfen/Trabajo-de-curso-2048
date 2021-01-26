@@ -40,6 +40,10 @@ header{
     padding: 2%;
 }
 
+
+#juego{
+    justify-self: center;
+}
 /* Tablero */
 #tablero{
     grid-area: tablero;
