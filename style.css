@@ -1,29 +1,56 @@
+
+:root{
+    --lado-celda: 100px;
+    --pepito: calc(var(--lado-celda) + (3 * 0.5em) + 4em + 300px);
+}
 body{
-    display: grid;
-    grid-template-columns: 20% 80%;
-    grid-template-rows: auto;
-    grid-template-areas:
-        "header header"
-        "panel tablero";
     min-width: 700px;
 }
 
 header{
-    place-self: center;
-    grid-area: header;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif !important;
+    text-align: center;
 }
+
+/* Contenido */
+#contenido{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 
 /*Panel*/
 #panel{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
     width: fit-content;
-    grid-area: panel;
     background-color: gray;
     border: 5px dashed black;
     border-radius: 10px;
+    margin-bottom: 2em;
 }
 
+#panel button{
+    margin: 1em auto;
+    align-self: center;
+    width: 80%;
+    height: 2em;
+}
+
+@media (max-width: 790px) {
+    #panel{
+        flex-direction: row;
+    }
+    #panel button{
+        width: 20%;
+        margin: 1em;
+    }
+  }
+
 .valor{
+    margin: 1em 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,30 +69,62 @@ header{
 
 
 #juego{
-    justify-self: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-grow: 3;
 }
+
+/* mensaje */
+#mensaje-final{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    height: 100%;
+    z-index: 100;
+    background: rgb(245, 245, 245, 0.4);
+    opacity: 0;
+    -webkit-transition: opacity 1.2s linear;
+    -moz-transition: opacity 1.2s linear; 
+    transition: opacity 1.2s linear;
+}
+
+
+
+#mensaje-final p{
+    font-size: 70px;
+}
+
 /* Tablero */
 #tablero{
-    grid-area: tablero;
-    place-self: center;
     display: grid;
     grid-template-columns: repeat(4, 120px);
     grid-template-rows: repeat(auto-fill, 120px);
     grid-row-gap: .5em;
     grid-column-gap: .5em;
     width: fit-content;
-    padding: 2%;
+    padding: 2em;
+    padding-bottom: 2.75em;
     background-color: darkslategray;
     justify-content: space-evenly;
-
+    z-index: 2;
+    border-radius: 10px;
 }
 
 #tablero div{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     margin:1%;
     margin-top: 1.5%;
-    width: 100px;
-    height: 100px;
+    width: var(--lado-celda);
+    height: var(--lado-celda);
     border: 5px solid antiquewhite;
     border-radius: 5px;
     font-size: 2em;

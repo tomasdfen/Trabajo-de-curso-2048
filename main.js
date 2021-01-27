@@ -1,9 +1,10 @@
 // Variables
 
-const tiempo = document.getElementById("tiempo")
-const puntuacion = document.getElementById("puntuacion")
-const dimension = parseInt(document.getElementById("dimension").innerText)
-const tablero = document.getElementById('tablero')
+const tiempo = document.getElementById("tiempo");
+const puntuacion = document.getElementById("puntuacion");
+const dimension = parseInt(document.getElementById("dimension").innerText);
+const tablero = document.getElementById('tablero');
+const mensaje_final = document.getElementById("mensaje-final")
 let celdas = []
 
 var tiempo_transcurrido = 0;
@@ -22,7 +23,12 @@ var arraysMatch = function (arr1, arr2) {
 
 };
 
-function dibujaTablero() {
+function init() {  
+    document.addEventListener('keyup', actualiza)  
+    mensaje_final.style.transition = "opacity 0s linear";
+    mensaje_final.style.opacity = 0;
+    tablero.innerHTML = ""
+    celdas = [];
     for (let i = 0; i < dimension; i++) {
         for (let j = 0; j < dimension; j++) {
             celda = document.createElement('div')
@@ -194,6 +200,7 @@ function actualiza(direccion) {
             izquierda();
             sumaFila();
             izquierda();
+            nuevo_numero();
             break;
         case 38:
             ultima = 38;
@@ -202,6 +209,7 @@ function actualiza(direccion) {
             arriba();
             sumaColumna();
             arriba();
+            nuevo_numero();
             break;
         case 39:
             ultima = 39;
@@ -210,6 +218,7 @@ function actualiza(direccion) {
             derecha();
             sumaFila();
             derecha();
+            nuevo_numero();
             break;
         case 40:
             ultima = 40;
@@ -218,12 +227,12 @@ function actualiza(direccion) {
             abajo();
             sumaColumna();
             abajo();
+            nuevo_numero();
             break;
         default:
             break;
     }
     if ((celdas.map((celda) => parseInt(celda.innerHTML)).includes(0))) {
-        nuevo_numero();
         puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
     } else {
         iniciado = false;
@@ -233,6 +242,8 @@ function actualiza(direccion) {
 }
 
 function fin() {
+    mensaje_final.style.transition = "opacity 1.2s linear";
+    mensaje_final.style.opacity = 1;
     window.clearInterval(temporizador);
     console.log("Ha finalizado el juego")
     document.removeEventListener('keyup', actualiza)
@@ -240,6 +251,6 @@ function fin() {
 }
 
 
-dibujaTablero()
-document.addEventListener('keyup', actualiza)
+
+
 
