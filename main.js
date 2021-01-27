@@ -24,6 +24,7 @@ var arraysMatch = function (arr1, arr2) {
 };
 
 function init() {  
+    tiempo_transcurrido = 0;
     document.addEventListener('keyup', actualiza)  
     mensaje_final.style.transition = "opacity 0s linear";
     mensaje_final.style.opacity = 0;
