@@ -151,19 +151,23 @@ button {
 
 /* Posible mejora aplicando efecto de desplazamiento
 
-
-.desplaza-arriba {
-  transform: translate(calc(- (100px + 0.5em)), 0);
-  z-index: 2;
-}
-
-.desplaza-izquierda {
+.desplaza-abajo {
   transform: translate(0, calc(- (100px + 0.5em)));
   z-index: 2;
 }
 
+.desplaza-arriba {
+  transform: translate(0, calc(- (100px + 0.5em)));
+  z-index: 2;
+}
+
+.desplaza-izquierda {
+  transform: translate(calc(- (100px + 0.5em)), 0);
+  z-index: 2;
+}
+
 .desplaza-derecha {
-  transform: translate(0, calc((100px + 0.5em)));
+  transform: translate(calc((100px + 0.5em)), 0);
   z-index: 2;
 } */
 
