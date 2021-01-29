@@ -10,7 +10,7 @@ let celdas = []
 var tiempo_transcurrido = 0;
 var temporizador = 0;
 var iniciado = false
-var ultima = 0;
+var mod;
 // Funciones
 
 var arraysMatch = function (arr1, arr2) {
@@ -23,9 +23,10 @@ var arraysMatch = function (arr1, arr2) {
 
 };
 
-function init() {  
+function init() {
     tiempo_transcurrido = 0;
-    document.addEventListener('keyup', actualiza)  
+    puntuacion.innerText = 0;
+    document.addEventListener('keyup', actualiza)
     mensaje_final.style.transition = "opacity 0s linear";
     mensaje_final.style.opacity = 0;
     tablero.innerHTML = ""
@@ -43,17 +44,23 @@ function init() {
 }
 
 function nuevo_numero() {
-    let aleatorio = Math.floor(Math.random() * celdas.length)
-    console.log(aleatorio);
-    if (celdas[aleatorio].innerHTML == 0) {
-        if (Math.random() < 1 / 2) {
-            celdas[aleatorio].className = "4"
-            celdas[aleatorio].innerHTML = 4
-        } else {
-            celdas[aleatorio].className = "2"
-            celdas[aleatorio].innerHTML = 2
-        }
-    } else nuevo_numero();
+    if ((celdas.map((celda) => parseInt(celda.innerHTML)).includes(0))) {
+        let aleatorio = Math.floor(Math.random() * celdas.length)
+        console.log(aleatorio);
+        if (celdas[aleatorio].innerHTML == 0) {
+            if (Math.random() < 1 / 2) {
+                celdas[aleatorio].className = "4"
+                celdas[aleatorio].innerHTML = 4
+            } else {
+                celdas[aleatorio].className = "2"
+                celdas[aleatorio].innerHTML = 2
+            }
+        } else nuevo_numero();
+    } else{
+        iniciado = false;
+        fin();
+    }
+
 
 
 
@@ -61,6 +68,8 @@ function nuevo_numero() {
 }
 
 function izquierda() {
+    mod = true;
+    n_celdas = [...celdas]
     for (let i = 0; i < (dimension * dimension); i++) {
         if (i % 4 === 0) {
             let fila = []
@@ -83,6 +92,7 @@ function izquierda() {
         }
     }
 }
+
 function derecha() {
     for (let i = 0; i < (dimension * dimension); i++) {
         if (i % 4 === 0) {
@@ -167,6 +177,7 @@ function sumaColumna() {
             celdas[i].className = suma.toString()
             celdas[i].innerHTML = suma
             celdas[i + dimension].innerHTML = 0
+            celdas[i + 1].className = ""
         }
     }
 }
@@ -204,7 +215,6 @@ function actualiza(direccion) {
             nuevo_numero();
             break;
         case 38:
-            ultima = 38;
             inicia_contador();
             console.log("Se pulso arriba")
             arriba();
@@ -213,7 +223,6 @@ function actualiza(direccion) {
             nuevo_numero();
             break;
         case 39:
-            ultima = 39;
             inicia_contador();
             console.log("Se pulso derecha")
             derecha();
@@ -222,7 +231,6 @@ function actualiza(direccion) {
             nuevo_numero();
             break;
         case 40:
-            ultima = 40;
             inicia_contador();
             console.log("Se pulso abajo")
             abajo();
@@ -233,12 +241,8 @@ function actualiza(direccion) {
         default:
             break;
     }
-    if ((celdas.map((celda) => parseInt(celda.innerHTML)).includes(0))) {
-        puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-    } else {
-        iniciado = false;
-        fin();
-    }
+    puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
+
 
 }
 

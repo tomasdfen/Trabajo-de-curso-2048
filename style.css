@@ -115,7 +115,6 @@ header{
     padding-bottom: 2.75em;
     background-color: darkslategray;
     justify-content: space-evenly;
-    z-index: 2;
     border-radius: 10px;
 }
 
@@ -128,6 +127,7 @@ header{
     border: 5px solid antiquewhite;
     border-radius: 5px;
     font-size: 2em;
+    z-index: 5;
     color: white;
     align-items: center;
     justify-content: center;
