@@ -217,38 +217,3 @@ button {
   background-color: rgb(0, 96, 185);
 }
 
-@-webkit-keyframes move-up {
-  0% {
-    top: 25px;
-    opacity: 1;
-  }
-
-  100% {
-    top: -50px;
-    opacity: 0;
-  }
-}
-
-@-moz-keyframes move-up {
-  0% {
-    top: 25px;
-    opacity: 1;
-  }
-
-  100% {
-    top: -50px;
-    opacity: 0;
-  }
-}
-
-@keyframes move-up {
-  0% {
-    top: 25px;
-    opacity: 1;
-  }
-
-  100% {
-    top: -50px;
-    opacity: 0;
-  }
-}
