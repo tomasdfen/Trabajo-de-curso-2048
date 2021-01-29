@@ -11,6 +11,7 @@ https://www.youtube.com/aniakubow -  Canal de Ania Kubów
 
 body {
   min-width: 700px;
+  background-color: rgb(247, 183, 100);
 }
 
 header {
@@ -126,7 +127,7 @@ button {
   width: fit-content;
   padding: 2em;
   padding-bottom: 2.75em;
-  background-color: darkslategray;
+  background-color: rgb(105, 107, 107);
   justify-content: space-evenly;
   border-radius: 10px;
 }
@@ -144,13 +145,12 @@ button {
   color: white;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s;
 }
 
+
 /* Posible mejora aplicando efecto de desplazamiento
-.desplaza-abajo {
-  transform: translate(calc(100px + 0.5em), 0);
-  z-index: 2;
-}
+
 
 .desplaza-arriba {
   transform: translate(calc(- (100px + 0.5em)), 0);
@@ -168,7 +168,7 @@ button {
 } */
 
 [class="2"] {
-  background-color: rgb(250, 216, 221);
+  background-color: rgb(253, 132, 151);
   transition: all 0.3s;
 }
 
