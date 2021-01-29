@@ -1,3 +1,11 @@
+/*
+FUENTES
+
+https://www.youtube.com/aniakubow -  Canal de Ania Kubów
+https://developer.mozilla.org/en-US/docs/Web/CSS/transform-function/translate() - Documentación para posible aplicación de animación de desplazamiento.
+
+*/
+
 // Variables
 
 const tiempo = document.getElementById("tiempo");
@@ -56,7 +64,7 @@ function nuevo_numero() {
                 celdas[aleatorio].innerHTML = 2
             }
         } else nuevo_numero();
-    } else{
+    } else {
         fin(false);
     }
 
@@ -130,6 +138,7 @@ function abajo() {
         let nueva_columna = ceros.concat(columna_filtrada)
 
         for (let j = 0; j < dimension; j++) {
+
             celdas[i + (dimension * j)].className = nueva_columna[j].toString()
             celdas[i + (dimension * j)].innerHTML = nueva_columna[j]
         }
@@ -242,16 +251,16 @@ function actualiza(direccion) {
             break;
     }
     puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-    if (parseInt(puntuacion.innerText) == 2048){
+    if (parseInt(puntuacion.innerText) == 2048) {
         fin(true)
     }
 
 }
 
 function fin(resultado) {
-    if (resultado){
+    if (resultado) {
         mensaje_final.innerHTML = '<p>¡Enhorabuena!</p><button onclick="init()">¿Volver a empezar?</button>';
-    } else{
+    } else {
         mensaje_final.innerHTML = '<p>¡Has perdido!</p><button onclick="init()">¿Volver a empezar?</button>';
     }
     iniciado = false;
