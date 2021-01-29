@@ -142,8 +142,28 @@ button{
     align-items: center;
     justify-content: center;
 
+
 }
 
+.desplaza-abajo{
+    transform: translate(calc( 100px + .5em ), 0);
+    z-index: 2;
+}
+
+.desplaza-arriba{
+    transform: translate(calc( - (100px + .5em) ), 0);
+    z-index: 2;
+}
+
+.desplaza-izquierda{
+    transform: translate(0, calc( - ( 100px + .5em )));
+    z-index: 2;
+}
+
+.desplaza-derecha{
+    transform: translate(0, calc( ( 100px + .5em )));
+    z-index: 2;
+}
 
 [class = '2']{
     background-color: rgb(250, 216, 221);

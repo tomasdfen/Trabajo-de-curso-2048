@@ -57,8 +57,7 @@ function nuevo_numero() {
             }
         } else nuevo_numero();
     } else{
-        iniciado = false;
-        fin();
+        fin(false);
     }
 
 
@@ -109,6 +108,7 @@ function derecha() {
             let nueva_fila = ceros.concat(fila_filtrada);
 
             for (let j = 0; j < dimension; j++) {
+
                 celdas[i + j].className = nueva_fila[j].toString()
                 celdas[i + j].innerHTML = nueva_fila[j]
 
@@ -242,11 +242,19 @@ function actualiza(direccion) {
             break;
     }
     puntuacion.innerText = Math.max(...celdas.map((celda) => celda.innerHTML))
-
+    if (parseInt(puntuacion.innerText) == 2048){
+        fin(true)
+    }
 
 }
 
-function fin() {
+function fin(resultado) {
+    if (resultado){
+        mensaje_final.innerHTML = '<p>¡Enhorabuena!</p><button onclick="init()">¿Volver a empezar?</button>';
+    } else{
+        mensaje_final.innerHTML = '<p>¡Has perdido!</p><button onclick="init()">¿Volver a empezar?</button>';
+    }
+    iniciado = false;
     mensaje_final.style.transition = "opacity 1.2s linear";
     mensaje_final.style.opacity = 1;
     window.clearInterval(temporizador);
